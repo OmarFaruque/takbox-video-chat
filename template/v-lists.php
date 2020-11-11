@@ -17,7 +17,7 @@ $allSessons = $this->allSessions();
                     data-sessionid="<?php echo $session_id; ?>" 
                     data-token="<?php echo $token; ?>" 
                     class="single-session">
-                    <div class="thumbnail">=
+                    <div class="thumbnail">
                         <?php if(has_post_thumbnail( $session->ID )): ?>
                             <?php echo get_the_post_thumbnail( $session, 'full', array('class' => 'sessionImg') ); ?>
                         <?php endif; ?>

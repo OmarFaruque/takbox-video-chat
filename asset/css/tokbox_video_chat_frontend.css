@@ -1,27 +1,388 @@
-#videos {
-    position: relative;
+/* 
+div#videos {
     width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    height: auto;
+    overflow: hidden;
 }
-
-#subscriber {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+.publisher-cover {
+    width: 17%;
+    float: left;
 }
-
 #publisher {
+    width: 150px;
+    height: 150px;
+    border-radius: 3px;
+    position: relative;
+    margin: 0px 5px;
+    overflow: hidden;
+}
+.suscriber-cover {
+    float: left;
+    width: 80%;
+    height: 170px;
+    overflow-x: auto;
+}
+.OT_subscriber {
+    cursor: pointer;
+    float: left;
+    width: 150px !important;
+    height: 150px !important;
+    margin: 0px 5px !important;
+}
+.OT_subscriber.active {
     position: absolute;
-    width: 360px;
-    height: 240px;
-    bottom: 10px;
-    left: 10px;
+    width: 600px !important;
+    height: 600px !important;
+    top: 245px;
+} */
+
+
+div#videos {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+.suscriber-cover {
+    float: right;
+    width: 200px;
+    height: 322px;
+}
+#subscriber {
+    height: 600px;
+    overflow: auto;
+}
+.publisher-cover {
+    border-radius: 3px;
+    position: relative;
+    left: 20px;
+    top: 34px;
+    z-index: 10;
+    float: left;
+    overflow: hidden;
+}
+#publisher {
+    width: 160px !important;
+    height: 160px !important;
+}
+.OT_subscriber {
+    width: 160px !important;
+    height: 160px !important;
+    margin-bottom: 10px !important;
+    cursor: pointer;
+}
+div.OT_subscriber {
+    display: none;
+}
+.OT_subscriber.active {
+    position: absolute;
+    width: 700px !important;
+    height: 600px !important;
+    top: 73px;
+    left: 0;
+    display: block;
+    overflow: hidden;
+}
+
+
+
+
+.count-cover {
+    margin: 20px;
+}
+div#countDownDate {
+    font-size: 22px;
+    color: #f07a96;
+}
+video#video_test {
+    transform: scale(-1, 1);
+    transform-origin: 50% 50%;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
     z-index: 100;
     border: 3px solid white;
     border-radius: 3px;
+    display: -webkit-box;
+}
+button.vjoinButton {
+    cursor: pointer;
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #675E60;
+    padding: 8px 22px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 15px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    box-shadow: 3px 3px 5px grey;
+    overflow: hidden;
+}
+.endButton {
+    background-image: url(https://assets.tokbox.com/solutions/images/leave-meeting-red.png);
+    width: 35px;
+    height: 35px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-position: center;
+    background-color: #a7a6a6;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    right: 40%;
+    bottom: -25px;
+    opacity: 0;
+    transition-property: top, bottom, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+}
+.publisher-cover:hover .single-session .endButton {
+    bottom: 26px;
+    opacity: 1;
+}
+
+div#textchat {
+    display: none;
+}
+div#history {
+    height: 250px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+.textchat-cover {
+    border-top: 1px solid #666;
+    overflow: hidden;
+}
+form.text-sender {
+    width: 100%;
+    overflow: hidden;
+    padding: 0px 15px;
+}
+input#msgTxt {
+    width: 195px;
+    color: #ffff;
+    background: #675E60;
+    padding: 8px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 20px;
+    border: none;
+    float: left;
+}
+input#msgTxt::-webkit-input-placeholder {
+    color: #fff;
+}
+input#admin_set_name::-webkit-input-placeholder {
+    color: #fff;
+}
+.text-chat-send {
+    float: left;
+    cursor: pointer;
+    background: #675E60;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.4s ease 0s;
+    margin-left: 5px;
+}
+.video-and-textchat-cover {
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    height: 100%;
+    display: none;
+}
+
+#history .mine {
+    text-align: right;
+    margin-right: 20px;
+}
+#history .theirs {
+    margin-left: 20px;
+}
+p.mas-owner-name {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+p.owner-msg {
+    max-width: 180px;
+    margin: 10px 0px;
+    color: #fff !important;
+    text-decoration: none;
+    background: #7b7375;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 12px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    overflow: hidden;
+    text-align: justify;
+}
+.header-name-and-minimise-cover {
+    width: 100%;
+    overflow: hidden;
+}
+.chat-name-header {
+    width: 70%;
+    text-transform: capitalize;
+    color: #fff;
+    margin: 15px 0px;
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: 400;
+    overflow: hidden;
+    float: left;
+}
+.chat-minimiser-cover {
+    width: 20%;
+    float: left;
+}
+svg.chat-minimiser {
+    padding: 10px;
+    cursor: pointer;
+}
+.text-chat-head {
+    text-transform: capitalize;
+    cursor: pointer;
+    color: #fff;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    min-height: 20px;
+}
+.massage_author {
+    display: none;
+}
+.textchat-and-header.admin {
+    display: none;
+}
+.textchat-and-header.admin.user {
+    display: inline-block;
+}
+
+.admin-set-name {
+    width: 100%;
+    overflow: hidden;
+}
+input.admin-set-name {
+    width: 195px;
+    color: #ffff;
+    background: #675E60;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    border: none;
+    margin-left: 15px;
+    float: left;
+}
+.admin-set-name-button {
+    float: left;
+    cursor: pointer;
+    background: #675E60;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.4s ease 0s;
+    margin-left: 5px;
+}
+.admin-set-user-name {
+    display: none;
+}
+.set-admin-name-show {
+    border-top: 1px solid #666;
+    overflow: hidden;
+    width: 100%;
+}
+.set-admin-name-show-text {
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+}
+label.admin-set-name-label {
+    color: #fff;
+    padding-left: 15px;
+    font-size: 12px;
+    font-weight: 200;
+}
+.all-textchat-cover-wpr {
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+    overflow-x: auto;
+}
+.all-textchat-cover {
+    margin: 0px 50px;
+}
+.all-textchat {
+    display: flex;
+    float: right;
+}
+.textchat-and-header {
+    width: 300px;
+    background: #242526;
+    z-index: 9999;
+    border-radius: 15px 15px 0px 0px;
+    border: none;
+    transition: all 0.4s ease 0s;
+    box-shadow: 0px 4px 0.5em #aaa;
+    float: left;
+    margin: 0 5px;
+    align-self: flex-end;
+}
+
+
+.video-and-textchat-cover-for-user {
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    height: 100%;
+    display: block;
+}
+.textchat-and-header.admin {
+    display: block;
+}
+.user-id{
+    display: none;
+}
+a.icon-comment{
+    cursor: pointer;
+}
+.author_and_user, .user_and_author, .massage_unique_id {
+    display: none;
+}
+.textchat-and-header.admin.user {
+    display: inline-block !important;
+}
+.textchat-and-header.user {
+    display: inline-block !important;
+}
+.mine p.owner-msg {
+    background: #0084ff;
+}
+
+.admin-set-name-cover {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* .text-chat-head {
+    display: none;
+} */
+div.textchat-and-header.demo-chat {
+    display: none !important;
 }

@@ -20,3 +20,247 @@
 small.description {
     color: #999;
 }
+
+.tokbox-video-chat-submenu {
+    margin: 50px;
+}
+.tokbox-video-chat-submenu-title h1 {
+    color: #707070;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+.tokbox-video-chat-submenu-title {
+    float: left;
+}
+.tokbox-video-chat-title-csv {
+    width: 100%;
+    overflow: hidden;
+}
+.tutor-lms-custom-user-csv-admin {
+    float: right;
+    padding-right: 70px;
+    margin-top: 10px;
+}
+.tokbox-video-chat {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.tokbox-video-chat-data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table.tokbox-video-chat-data-table .text-left {
+    text-align: left;
+}
+table.tokbox-video-chat-data-table td, th {
+    padding: 10px;
+}
+.tokbox-video-chat-loder {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 1;
+    background-color: rgba(255,255,255,0.1);
+    z-index: 999;
+}
+.tokbox-video-chat-gif {
+    vertical-align: middle;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.gifInnter {
+    display: table-cell;
+    vertical-align: middle;
+}
+.tokbox-video-chat-export-admin-icon h1:after {
+    cursor: pointer;
+    content: '';
+    background-image: url(images/csv.png);
+    background-repeat: no-repeat;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    margin-top: -22px;
+    margin-left: 8px;
+}
+h1#tokbox_video_chat_export {
+    color: #707070;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+.tokbox_video_chat_selector {
+    color: #444;
+    line-height: 28px !important;
+    height: 40px !important;
+    vertical-align: middle !important;
+    width: 100%;
+    padding: 5px !important;
+    padding-left: 10px !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    resize: vertical;
+}
+button.tokbox-video-chat-export-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+input.tokbox_video_chat-submit-settings {
+    cursor: pointer;
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #675E60;
+    padding: 8px 25px;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 10px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    box-shadow: 3px 3px 5px grey;
+}
+input.tokbox_video_chat-submit-settings:hover {
+    background: #1a1a96;
+}
+
+
+/* collapse start */
+.tokbox-video-chat-section-cover {
+    border: 1px solid #e5e5e5;
+    box-shadow: 4px 5px 10px 8px rgba(0,0,0,.04);
+    background: #fff;
+    box-sizing: border-box;
+    margin: 1%;
+    float: left;
+    height: auto;
+    overflow: hidden;
+}
+.tokbox_video_chat-accordion {
+    background: #1a1a96;
+    padding: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: #fff;
+    transition: 0.4s;
+    -webkit-user-select:none;
+}
+.tokbox_video_chat-panel {
+    min-height: 135px;
+    padding: 20px;
+    transition: max-height 0.2s ease-out;
+}
+
+.tokbox_video_chat-accordion-true:before {
+    float: right;
+    content: "\f142";
+    display: inline-block;
+    font: normal 20px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+}
+.tokbox_video_chat-accordion-false:before {
+    float: right;
+    content: "\f140";
+    display: inline-block;
+    font: normal 20px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+}
+
+.tokbox-video-chat-section-cover-width-full {
+    width: 98%;
+}
+.tokbox-video-chat-section-cover-width-half {
+    width: 48%;
+}
+/* collapse end */
+
+.table td, .table th {
+    padding: 10px !important;
+    text-align: center;
+    vertical-align: top;
+    border-top: 1px solid #f1f1f1;
+}
+.tokbox_video_chat-devider-25 {
+    margin-bottom: 25px;
+}
+.tokbox-video-chat-note {
+    color: #999;
+    margin-top: 5px;
+}
+.tokbox-video-chat-note span {
+    font-weight: 600;
+    color: #ff0b0b;
+}
+td.tokbox-video-chat-product-title a {
+    color: #04B89B;
+    text-decoration: none !important;
+}
+input.tokbox_video_chat_input {
+    width: 100%;
+}
+
+/*  */
+.text-chat-history {
+    background: #242526;
+    margin-top: 5px;
+}
+.text-chat-history .tokbox_video_chat-accordion {
+    background: #242526;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+#history .mine {
+    text-align: right;
+    margin-right: 20px;
+}
+#history .theirs {
+    margin-left: 20px;
+}
+.site-content p {
+    color: #666;
+}
+p:last-child {
+    margin-bottom: 0;
+}
+p.owner-msg {
+    max-width: 350px;
+    margin: 10px 0px;
+    color: #fff !important;
+    text-decoration: none;
+    background: #7b7375;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 12px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    overflow: hidden;
+    text-align: justify;
+}
+.mine p.owner-msg {
+    background: #0084ff;
+}
+select.show_profile_role {
+    width: 100%;
+}
