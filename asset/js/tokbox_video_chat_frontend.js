@@ -46,6 +46,10 @@ jQuery(document).ready(function($){
 jQuery(document).on('click', '.text-chat-head', function(){
   jQuery(this).prev("div#textchat").attr("style", "display:inline-block");
   jQuery(this).attr("style", "display:none");
+
+  // Mark all unseen as seen via rest Api 
+  
+
 });
 jQuery(document).on('click', 'svg.chat-minimiser', function(){
   jQuery(this).closest('div#textchat').attr("style", "display:none");

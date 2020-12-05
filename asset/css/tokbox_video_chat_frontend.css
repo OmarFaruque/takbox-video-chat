@@ -269,6 +269,7 @@ svg.chat-minimiser {
     display: inline-block;
 }
 
+
 .admin-set-name {
     width: 100%;
     overflow: hidden;
@@ -385,4 +386,25 @@ a.icon-comment{
 } */
 div.textchat-and-header.demo-chat {
     display: none !important;
+}
+
+
+span.notification {
+    position: absolute;
+    top: 0;
+    right: -8px;
+    border-radius: 100px;
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 25px;
+}
+.textchat-and-header{
+    position: relative;
 }

@@ -108,12 +108,14 @@ if (!class_exists('tokbox_video_chatClass')) {
 
         function create_session_for_chat(){
 
-            $sessionID = $this->sessionId();
-            $token = $this->openTalkToken($sessionID);
-
-            // update_option( 'tokbox_session_id', '' );
-            // update_option( 'tokbox_token', '' );
+            if(date('Y-m-d') !== get_option('tokbox_token_date')){
+                delete_option( 'tokbox_session_id' );
+            }
+            
             if( get_option( 'tokbox_session_id' ) == '' ){
+                $sessionID = $this->sessionId();
+                $token = $this->openTalkToken($sessionID);
+                update_option( 'tokbox_token_date', date('Y-m-d') );
                 update_option( 'tokbox_session_id', $sessionID );
                 update_option( 'tokbox_token', $token );
             }
@@ -124,6 +126,7 @@ if (!class_exists('tokbox_video_chatClass')) {
                 return false;
             }
 
+            
             $current_user_id = get_current_user_id();
             $author_role = ( !get_option('show_profile_role') ) ? 'contributor' : get_option('show_profile_role');
             $user_meta = get_userdata( $current_user_id );
@@ -131,9 +134,7 @@ if (!class_exists('tokbox_video_chatClass')) {
             $current_user_role = ( in_array( $author_role, $user_roles ) ) ? 'yes' : 'no';
 
             if( $current_user_role == 'no' ){
-                $url = $_SERVER['REQUEST_URI'];
-                $url_array = explode("/",$url);
-                if (!in_array("profiles", $url_array)){
+                if (basename( get_page_template() ) != 'template-profiles.php'){
                     return false;
                 }
             }
@@ -259,6 +260,7 @@ if (!class_exists('tokbox_video_chatClass')) {
             $chat_page = $_POST['chat_page'];
             $author_and_user = $_POST['author_and_user'];
             $user_and_author = $_POST['user_and_author'];
+            $seen = $_POST['seen'];
             
 
             if( $chat_page == 'no' ){
@@ -269,6 +271,7 @@ if (!class_exists('tokbox_video_chatClass')) {
 
                 $tokbox_text_chat_nw = array(
                     "msgText" => $msgText,
+                    "seen" => $seen,
                     "user_name" => $user_name,
                     "massage_author" => $massage_author,
                     'author_and_user' => $author_and_user,
@@ -316,6 +319,7 @@ if (!class_exists('tokbox_video_chatClass')) {
                     //text chat save.
                     $tokbox_text_chat_nw = array(
                         "msgText" => $msgText,
+                        "seen" => $seen,
                         "user_name" => $user_name,
                         "massage_author" => $massage_author,
                         'author_and_user' => $author_and_user,
@@ -779,8 +783,13 @@ if (!class_exists('tokbox_video_chatClass')) {
             global $post;
             global $wp;
 
-            $apiKey = '46932124';
-            $apiSecret = 'e739bbfbcad1d07c724bfa0f06c2d617844e2d40';
+
+
+            // $apiKey = '46932124';
+            // $apiSecret = 'e739bbfbcad1d07c724bfa0f06c2d617844e2d40';
+
+            $apiKey = '47005864'; 
+            $apiSecret = 'ba8a8c7ee7cb72f3f00f8178fee865c75d17279e';
 
             $current_page_id = $post->ID;
             $date_times = get_post_meta( $current_page_id, 'date_time', true );
@@ -847,6 +856,7 @@ if (!class_exists('tokbox_video_chatClass')) {
                 'chat_token' => $chat_token,
                 'user_login' => $user_login,
                 'current_user_role' => $current_user_role,
+                'template_name' => basename( get_page_template() ),
                 'ajax_url' => admin_url( 'admin-ajax.php' )
             ) );
         }
@@ -911,8 +921,11 @@ if (!class_exists('tokbox_video_chatClass')) {
 
 
         function opentok(){
-            $apiKey = '46932124';
-            $apiSecret = 'e739bbfbcad1d07c724bfa0f06c2d617844e2d40';
+            // $apiKey = '46932124';
+            // $apiSecret = 'e739bbfbcad1d07c724bfa0f06c2d617844e2d40';
+
+            $apiKey = '47005864'; 
+            $apiSecret = 'ba8a8c7ee7cb72f3f00f8178fee865c75d17279e';
             $opentok = new OpenTok($apiKey, $apiSecret);
             return $opentok; 
         }
@@ -920,6 +933,7 @@ if (!class_exists('tokbox_video_chatClass')) {
         public function sessionId(){
 
             $opentok = $this->opentok();
+            
 
             // Create a session that attempts to use peer-to-peer streaming:
             $session = $opentok->createSession();
@@ -972,8 +986,8 @@ if (!class_exists('tokbox_video_chatClass')) {
 
         function test(){
             // $broadcastId = $this->broadcastId();
-            // echo $sessionId = $this->sessionId();
-            echo 'token: ' . $this->openTalkToken() . '<br/>';
+            $sessionId = $this->sessionId();
+            echo 'token: ' . $this->openTalkToken($sessionId) . '<br/>';
             // echo 'token : ' . $token = $opentok->generateToken($sessionId);
             // echo 'jony' . $broadcast = $opentok->getBroadcast($broadcastId);
         }

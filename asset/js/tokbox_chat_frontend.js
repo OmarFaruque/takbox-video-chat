@@ -14,17 +14,14 @@ if( user_login == 1 ){
     console.log('author-cannected');
 
   }else{
-      var url = window.location.href;
-      var res = url.split("/");
-      const isInArray = res.includes('profiles');
-      if( isInArray == true ){
+      
+      if( tockbox.template_name == 'template-profiles.php' ){
         var apikey = tockbox.tockbox_api;
         var sessionId = tockbox.chat_session_id;
         var token = tockbox.chat_token;
 
         initializeSession(apikey, sessionId, token);
 
-        console.log('user-cannected');
       }
     }
 }
@@ -146,9 +143,15 @@ function initializeSession(apiKey, sessionId, token) {
   var i = 0;
   if( i == 0 ){
     session.connect(token, function(error) {
-        if (error) {
-            handleError(error);
-        }else{
+        if (error) 
+        {
+            console.log('token: ' + token);
+            console.log('apikey: ' + apiKey);
+            console.log('LessionID: ' + sessionId);
+            console.log(error);
+        } 
+        else 
+        {
             i++;
         }
     });
@@ -173,6 +176,7 @@ function initializeSession(apiKey, sessionId, token) {
   session.on('signal:msg', function signalCallback(event) {
     // width();
     // console.log('width : ' + width());
+
 
     console.log(JSON.stringify(event.data));
 
@@ -213,11 +217,12 @@ function initializeSession(apiKey, sessionId, token) {
             append_sms: 'yes',
         },
         success:function(data){
+            
             console.log(data);
               if(data.message == 'success'){
 
                 if( data.admin_set_name == '' ){
-
+                  console.log('inside if');
                   var set_name_html = '<div class="admin-set-name-cover"><form class="admin-set-name-submit"><label for="admin_set_name" class="admin-set-name-label">Set your name for this user :</label><input type="text" placeholder="Set your name for this user" id="admin_set_name" class="admin-set-name" value=""><div class="admin-set-user-name"></div><button class="admin-set-name-button"><svg class="sqpo3gyd" height="20px" width="20px" viewBox="0 0 24 24"><path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.8132856,11.0605983 22.3423792,10.4322088 21.714504,10.118014 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.8376543,3.0486314 1.15159189,3.99121575 L3.03521743,10.4322088 C3.03521743,10.5893061 3.34915502,10.7464035 3.50612381,10.7464035 L16.6915026,11.5318905 C16.6915026,11.5318905 17.1624089,11.5318905 17.1624089,12.0031827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" fill-rule="evenodd" stroke="none"></path></svg></button></form></div><div class="set-admin-name-show"><div class="set-admin-name-show-text"></div></div>';
                   jQuery(set_name_html).insertAfter(jQuery(hedder_name_class).find('.header-name-and-minimise-cover'));
                   jQuery(hedder_name_class).find('.header-name-and-minimise-cover').addClass('ThisIsInsidejQuery5');
@@ -229,6 +234,7 @@ function initializeSession(apiKey, sessionId, token) {
                   admin_set_user_name.textContent = event.data.user_and_author;
 
                 }else{
+                  
                   var set_name_html = '<div class="set-admin-name-show"><div class="set-admin-name-show-text"></div></div>';
                   jQuery(set_name_html).insertAfter(jQuery(hedder_name_class).find('.header-name-and-minimise-cover'));
                   jQuery(hedder_name_class).find('.header-name-and-minimise-cover').addClass('ThisIsInsidejQuery5');
@@ -248,7 +254,7 @@ function initializeSession(apiKey, sessionId, token) {
       var author_and_user = hedder_name_class.querySelector('.author_and_user');
       var user_and_author = hedder_name_class.querySelector('.user_and_author');
       var massage_unique_id = hedder_name_class.querySelector('.massage_unique_id');
-      
+      var notification = 0;
       
       chat_hedder_name.textContent = event.data.user_name;
       chat_hedder_name1.textContent = event.data.user_name;
@@ -275,9 +281,10 @@ function initializeSession(apiKey, sessionId, token) {
         success:function(data){
             // console.log(data);
               if(data.message == 'success'){
-
+                
                 msgHistory.textContent = '';
                 data.tokbox_text_chat.forEach(function(item) {
+                  if(item.seen == 'false') notification++;
                   var msgText = item.msgText;
                   var user_name = item.user_name;
 
@@ -290,7 +297,16 @@ function initializeSession(apiKey, sessionId, token) {
                   cover.appendChild(msg);
                   msgHistory.appendChild(cover);
                   cover.scrollIntoView();
+                  
                 });
+
+                var notificationText = document.createElement('span'); 
+                notificationText.textContent = notification;
+                notificationText.className = 'notification';
+                if(notification > 0){
+                  console.log('this is notification: ' + notification);
+                  hedder_name_class.appendChild(notificationText);
+                }
 
                 var cover = document.createElement('div');
                 var msg = document.createElement('p');
@@ -306,9 +322,10 @@ function initializeSession(apiKey, sessionId, token) {
       });
 
     }else if( event.data.author_and_user === tockbox.user_name ){
-
+      console.log('inside else omar');
       if( event.data.massage_unique_id === tockbox.user_name +'_'+ event.data.user_and_author || event.data.massage_unique_id === event.data.user_and_author + '_' + tockbox.user_name ){
 
+        
           var admin_send_massage = ( event.data.massage_author == event.data.author_and_user ) ? event.data.user_name : event.data.massage_author;
           var hedder_name_class = document.querySelector(".textchat-and-header.user."+admin_send_massage);
           var msgHistory = hedder_name_class.querySelector('#history');
@@ -322,14 +339,19 @@ function initializeSession(apiKey, sessionId, token) {
           msgHistory.appendChild(cover);
           cover.scrollIntoView();
         
+
+          if(!hedder_name_class.querySelector('.text-chat-head[style="display:none"]')){
+            hedder_name_class.querySelector('.notification').textContent = hedder_name_class.querySelector('.notification').textContent++;
+          }
         console.log('50 ' + admin_send_massage);
       }
 
     }
 
 
+    
     if( tockbox.user_name === event.data.user_name  && tockbox.user_name +'_'+ event.data.massage_author !== tockbox.user_name + '_' + tockbox.user_name ){
-      console.log('1');      
+      
 
       console.log(event.data.massage_unique_id + '/' + tockbox.user_name +'_'+ event.data.massage_author + '::' + event.data.massage_author + '_' + tockbox.user_name);
       if( event.data.massage_unique_id === tockbox.user_name +'_'+ event.data.massage_author || event.data.massage_unique_id === event.data.massage_author + '_' + tockbox.user_name ){
@@ -385,12 +407,24 @@ function initializeSession(apiKey, sessionId, token) {
 
 
 jQuery(document).on('submit', 'form.active' , function(event){
-
       event.preventDefault();
 
       var apiKey = tockbox.tockbox_api;
+
       var sessionId = jQuery(this).closest('#textchat').data('sessionid');
+      console.log('session id: ' + sessionId);
       var session = OT.initSession(apiKey, sessionId);
+      var token = tockbox.chat_token;
+
+      session.connect(token, function(error) {
+        if (error) {
+          console.log(error.message);
+        } else {
+          // You have connected to the session. You could publish a stream now.
+        }
+      });
+
+
 
       var msgTxt = jQuery(this).find('input#msgTxt').val();
       var massage_author = jQuery(this).find('div.massage_author').text();
@@ -407,6 +441,7 @@ jQuery(document).on('submit', 'form.active' , function(event){
           author_and_user: author_and_user,
           user_and_author: user_and_author,
           massage_unique_id: massage_unique_id,
+          seen: false
       },
       }, function signalCallback(error) {
         if (error) {
@@ -437,6 +472,7 @@ jQuery(document).on('submit', 'form.active' , function(event){
           massage_unique_id: massage_unique_id,
           chat_page: 'yes',
           name_set: 'no',
+          seen: false,
       },
       success:function(data){
           console.log(data);
@@ -500,6 +536,7 @@ jQuery(document).on('submit', 'form.admin-set-name-submit.active' , function(eve
         massage_unique_id: massage_unique_id,
         chat_page: 'yes',
         name_set: 'yes',
+        seen: false,
     },
     success:function(data){
         console.log(data);
