@@ -119,9 +119,41 @@ if( user_login == 1 ){
 
 });
 
+
+var sendAjaxtoMarkAllasSeen = function(author_and_user, user_and_author, element){
+
+  jQuery.ajax({
+    method: 'POST',
+    dataType: "json",
+    url: tockbox.ajax_url,
+    data: {
+        action:         'all_user_details',
+        author_and_user: author_and_user,
+        user_and_author: user_and_author,
+        sendTOappend: 'no',
+        append_sms: 'no',
+        seen: true
+    },
+    success:function(data){
+          if(data.message == 'success'){
+            element.next('.notification').remove();
+          }
+        }
+    });
+    
+}
+
+
 jQuery(document).on('click', '.text-chat-head', function(){
+    const element = jQuery(this);
+    const author_and_user = jQuery(this).prev('div').find('form.text-sender').find('div.author_and_user').text();
+    const user_and_author = jQuery(this).prev('div').find('form.text-sender').find('div.user_and_author').text();
+    var message = sendAjaxtoMarkAllasSeen(author_and_user, user_and_author, element);
+    
+
     jQuery(this).prev("div#textchat").attr("style", "display:inline-block");
     jQuery(this).attr("style", "display:none");
+
 });
 jQuery(document).on('click', 'svg.chat-minimiser', function(){
     jQuery(this).closest('div#textchat').attr("style", "display:none");
@@ -317,6 +349,14 @@ function initializeSession(apiKey, sessionId, token) {
                 cover.appendChild(msg);
                 msgHistory.appendChild(cover);
                 cover.scrollIntoView();
+
+
+
+                // make all unseen message seen if chatbox are open 
+                // if(sfsdf){
+
+                // }
+
               }
             }
       });
@@ -341,9 +381,8 @@ function initializeSession(apiKey, sessionId, token) {
         
 
           if(!hedder_name_class.querySelector('.text-chat-head[style="display:none"]')){
-            hedder_name_class.querySelector('.notification').textContent = hedder_name_class.querySelector('.notification').textContent++;
+            hedder_name_class.querySelector('.notification').textContent = parseInt(hedder_name_class.querySelector('.notification').textContent) + 1;
           }
-        console.log('50 ' + admin_send_massage);
       }
 
     }

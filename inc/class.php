@@ -467,6 +467,15 @@ if (!class_exists('tokbox_video_chatClass')) {
                         $tokbox_text_chat = array();
                     }else{
                         $tokbox_text_chat = get_user_meta( $user_max_id, 'tokbox_text_chat_' . $user_max_id . '_' . $user_min_id, true );
+                        $newchat = array();
+                        if(isset($_POST['seen'])){
+                            foreach($tokbox_text_chat as $single){
+                                $single['seen'] = true;
+                                array_push($newchat, $single);
+                            }
+                            update_user_meta( $user_max_id, 'tokbox_text_chat_' . $user_max_id . '_' . $user_min_id, $newchat );
+                        }
+
                     }
 
                 }
@@ -476,6 +485,7 @@ if (!class_exists('tokbox_video_chatClass')) {
                 array(
                     'message' => 'success',
                     'userId' => $userId,
+                    'newChat' => $newchat,
                     'user_name' => $user_name,
                     'tokbox_text_chat' => $tokbox_text_chat,
                     'admin_set_name' => $admin_set_name,

@@ -44,6 +44,7 @@ jQuery(document).ready(function($){
 
 
 jQuery(document).on('click', '.text-chat-head', function(){
+  console.log('HI on click');
   jQuery(this).prev("div#textchat").attr("style", "display:inline-block");
   jQuery(this).attr("style", "display:none");
 
